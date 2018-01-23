@@ -1,3 +1,3 @@
 # Corazon
 
-For School Project
+Thesis Material 
