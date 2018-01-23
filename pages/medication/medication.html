@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar color="secondary">
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>{{Users[0].Fname}}'s Medication</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngFor="let M of CurrentMed">
+  <ion-card style="background-color:#FFFFFD">
+      <ion-card-header style="background-color:#EBECE4">
+        <span style="color: #488aff; font-weight:900;">Medicine Name: {{M.MedicineName}} </span>
+        <ion-icon style="float: right;" name="close" (click) = "DeleteMed(M)"></ion-icon>
+        </ion-card-header>
+
+   <ion-item class="color">
+      <h2 style="color:black">Dosage: <span class="tab">{{M.Dosage}}</span></h2>
+    </ion-item>
+
+      <ion-item class="color">
+        <h2 style="color:black">Duration: <span class="tab">{{M.Duration}} Days</span></h2>
+      </ion-item>
+
+      <ion-item class="color">
+        <h2 style="color:black">Every: <span class="longtab">{{M.Interval}} Hours</span></h2>
+      </ion-item>
+
+      <ion-item class="color">
+       <h2 style="color:black">Start: <span class="longtab">{{M.Start | date:'MM-dd-yyyy'}}</span></h2>
+      </ion-item>
+
+      <ion-item class="color">
+        <h2 style="color:black">End:   <span class="longtab">{{M.LastSched | date:'MM-dd-yyyy'}}</span></h2>
+      </ion-item>
+
+      <ion-item class="color">
+       <h2 style="color:black">Side Effect: <span class="shorttab">{{M.SideEffect}}</span></h2>
+      </ion-item>
+
+      <ion-item class="color">
+        <h2 style="color:black">Reason Taking:  <span class="shortertab">{{M.Reason}}</span></h2>
+      </ion-item>
+
+      <ion-item class="color">
+        <h2 style="color:black">Note:  <span class="shortertab">{{M.Note}}</span></h2>
+      </ion-item>
+
+</ion-card>
+  </div>
+</ion-content>
+
+<ion-fab bottom right style="margin:15px;">
+  <button ion-fab (click)="AddMed()">
+    <ion-icon name="add"></ion-icon>
+  </button>
+</ion-fab>

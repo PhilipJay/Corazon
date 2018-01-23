@@ -1,0 +1,42 @@
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>Update {{ title }}</ion-title>
+  </ion-navbar>
+
+ 
+
+</ion-header>
+
+
+<ion-content padding>
+  <div [hidden]="i !== null">
+    <ion-item >
+        <ion-label>{{ title }}</ion-label>
+        <ion-input type="number" text-center [(ngModel)]="value"></ion-input>
+      </ion-item>
+      <ion-fab bottom right style="margin:15px;">
+            <button ion-fab (click)="UpdateUserData()">
+              <ion-icon name="checkmark"></ion-icon>
+            </button>
+        </ion-fab>
+      
+  </div>
+
+  <div [hidden]="i === null">
+      <ion-item>
+          <ion-label>{{ title }}</ion-label>
+          <ion-input type="number" text-center [(ngModel)]="value1"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label>Over</ion-label>
+          <ion-input type="number" text-center [(ngModel)]="value2"></ion-input>
+      </ion-item>
+        <ion-fab bottom right style="margin:15px;">
+            <button ion-fab (click)="UpdateUserData1()">
+            <ion-icon name="checkmark"></ion-icon>
+            </button>
+        </ion-fab>
+  </div>
+</ion-content>
+

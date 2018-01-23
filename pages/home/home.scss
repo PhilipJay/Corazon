@@ -1,0 +1,28 @@
+page-home {
+    #banner { 
+        position: relative;
+        background-color:#2E8B57;
+        height:80px; 
+        border-bottom: solid;
+        border-width: 1px;
+    }
+   
+    #banner-text{
+        float:right;
+        margin-right:50px; 
+        margin-top:8px;
+        height:100%; 
+        text-align:center; 
+        width:60%;
+    }
+    #banner-text h2{
+        font-size:20px;
+        color: #eee;
+    }
+    #banner-text h3{
+        font-size:17px;
+        color: #eee;
+    }
+
+    
+}
