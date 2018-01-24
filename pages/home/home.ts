@@ -55,6 +55,7 @@ export class HomePage {
  
   }
   Update(title, value){
+  //  this.platform.registerBackButtonAction(() => {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Select Action',
       buttons: [
@@ -91,6 +92,7 @@ export class HomePage {
       ]
     });
     actionSheet.present();
+ // })
   }
   Update1(title, value, value1){
     let actionSheet = this.actionSheetCtrl.create({

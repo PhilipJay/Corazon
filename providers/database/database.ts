@@ -405,8 +405,8 @@ AddMedicine(Med, LastSched){
   }
   
 
-  getRecord(Title) {
-    return this.database.executeSql("SELECT * FROM tblHistory where UserId = " + this.User[0].UserId + " AND Description = '" + Title + "'", []).then((data) => {
+  getRecord() {
+    return this.database.executeSql("SELECT * FROM tblHistory where UserId = " + this.User[0].UserId, []).then((data) => {
       let Histori = [];
       if (data.rows.length > 0) {
         for (var i = 0; i < data.rows.length; i++) {
