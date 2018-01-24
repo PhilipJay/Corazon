@@ -11,10 +11,43 @@
 
 <ion-content padding>
 
-      <button ion-button full (click)="Modal('Height')">Height</button>
-      <button ion-button full (click)="Modal('Weight')">Weight</button>
-      <button ion-button full (click)="Modal('BMI')">Body Mass Index</button>
-      <button ion-button full (click)="Modal('Blood Sugar')">Blood Sugar</button>
-      <button ion-button full (click)="Modal('Blood Pressure')">Blood Pressure</button>
+  <ion-card>
+    <ion-card-header>
+     Height Chart
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #HeightCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+      <ion-card-header>
+       Weight Chart
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #WeightCanvas></canvas>
+      </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+      <ion-card-header>
+       Blood Sugar Chart
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #BSugarCanvas></canvas>
+      </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+      <ion-card-header>
+       Blood Pressure Chart
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #BPCanvas></canvas>
+      </ion-card-content>
+  </ion-card>
+
+
+  
 </ion-content>
 
