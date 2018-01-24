@@ -8,14 +8,14 @@ ionic cordova plugin add uk.co.workingedge.cordova.plugin.sqliteporter
 ionic cordova plugin add cordova-sqlite-storage
 npm install --save @ionic-native/sqlite-porter @ionic-native/sqlite
 
-/******************************
+
 		FOR Calendar Plugin
 
 npm install -g typings
 npm install --save intl
 npm install ionic2-calendar@0.4.2 --save
 
-/******************************
+
 		FOR THE Camera Plugin
 
 npm install --save @ionic-native/camera @ionic-native/file @ionic-native/file-path @ionic-native/transfer(this might not work)
