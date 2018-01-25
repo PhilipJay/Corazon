@@ -4,9 +4,9 @@
 
 		FOR SQLite Plugins
 
-ionic cordova plugin add uk.co.workingedge.cordova.plugin.sqliteporter
-ionic cordova plugin add cordova-sqlite-storage
-npm install --save @ionic-native/sqlite-porter @ionic-native/sqlite
+*ionic cordova plugin add uk.co.workingedge.cordova.plugin.sqliteporter 
+*ionic cordova plugin add cordova-sqlite-storage 
+*npm install --save @ionic-native/sqlite-porter @ionic-native/sqlite 
 
 
 		FOR Calendar Plugin
