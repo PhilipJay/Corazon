@@ -11,8 +11,8 @@ import { SQLitePorter } from '@ionic-native/sqlite-porter';
 import { SQLite } from '@ionic-native/sqlite';
 import { SMS } from '@ionic-native/sms';
 import { BackgroundMode } from '@ionic-native/background-mode';
-import { Network } from '@ionic-native/network';
-import { Geolocation } from '@ionic-native/geolocation';
+
+
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { NgCalendarModule  } from 'ionic2-calendar';
@@ -90,8 +90,6 @@ import { GalleryFolderPage } from '../pages/gallery-folder/gallery-folder';
     SQLite,
     SMS,
     BackgroundMode,
-    Network,
-    Geolocation,
     LocalNotifications,
     DatabaseProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

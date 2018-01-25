@@ -214,7 +214,7 @@ public pathForImage(img) {
 }
 public uploadImage() {
   // Destination URL
-  var url = "../img";
+  var fileUrl = "assets/images/";
  
   // File for Upload
   var targetPath = this.pathForImage(this.lastImage);
@@ -238,15 +238,16 @@ public uploadImage() {
   this.loading.present();
  
   // Use the FileTransfer to upload the image
-  fileTransfer.upload(targetPath, url, options).then(data => {
+  fileTransfer.upload(targetPath, fileUrl, options).then(data => {
     this.loading.dismissAll()
     this.presentToast('Image succesful uploaded.');
   }, err => {
     this.loading.dismissAll()
-    this.presentToast('Error');
+    this.presentToast(Error);
+    console.log(err)
   });
   console.log(targetPath)
-  console.log(url)
+  console.log(fileUrl)
   console.log(options)
 }
 }

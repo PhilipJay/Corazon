@@ -89,7 +89,7 @@ console.log(Last > TempNow)
                   console.log("1st")  // na ooverride kapag may iba na, gawin ko na lang array na magkasama yun Id at Msg
                 }
                else if( Second >= TempNow){
-                this.timer.push({ 
+                this.timer.push({
                   event: Second,
                   UserId: this.UserId,
                   Msg:  "Hello, you have 3 hours before your "+ Title +" at " + address

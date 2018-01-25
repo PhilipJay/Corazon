@@ -250,6 +250,24 @@ export class DatabaseProvider {
      this.database.executeSql("UPDATE tblUser SET LastUpdated = '" + Now + "'," + Field['Top'] +"='" +value['valueTop'] +"'," + Field['Down'] +"='" +value['valueDown'] +"' WHERE UserId = " + Id , [])
   }
 
+  GetLatestThenDelete(Desc){
+    return this.database.executeSql("SELECT * FROM tblHistory WHERE UserID = "+ this.User[0].UserId + " AND Description = '" + Desc + "' order by HistoryId DESC limit 1", []).then((data) => {
+      let Last = [];
+      if (data.rows.length > 0) {
+        for (var i = 0; i < data.rows.length; i++) {
+          Last.push({
+            HistoryId: data.rows.item(i).HistoryId
+           });
+        }           
+      }
+      this.database.executeSql("Delete FROM tblHistory where HistoryId = " +  Last[0].HistoryId, [])
+      console.log(Last[0].HistoryId)
+    }, err => {
+      console.log('Error: ', err);
+      return [];
+    });
+  }
+
   DeleteUser(ID){
      this.database.executeSql("Delete FROM tblUser where UserId = " + ID['UserId'] , [])
      this.database.executeSql("Delete FROM tblMedication where UserId = " + ID['UserId'] , [])
