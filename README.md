@@ -35,7 +35,7 @@ $ ionic cordova  plugin add cordova-plugin-filepath --save
 
 
 		FOR LOCAL NOTIFICATION
-$ cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications
+$ ionic cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications
 
 $ npm install --save @ionic-native/local-notifications
 
@@ -51,7 +51,7 @@ $ npm install --save @ionic-native/sms
 
 		FOR BACKGROUND MODE
 
-$ cordova plugin add https://github.com/katzer/cordova-plugin-background-mode.git
+$ ionic cordova plugin add https://github.com/katzer/cordova-plugin-background-mode.git
 
 $ npm install --save @ionic-native/background-mode
 
@@ -65,15 +65,15 @@ $ npm install chart.js --save
 		Also install Moment
 
 
-**Dont Forget to add =>
-ionic cordova platform add android
+Dont Forget to add
+**ionic cordova platform add android**
 
-**to run in webview
-ionic serve
+to run in webview
+*ionic serve*
 
-**to run in a device
-ionic cordova run android --devices
+to run in a device
+**ionic cordova run android --devices**
 ctrl + c to cancel
 
-**Check device Connection
-adb devices
+Check device Connection
+**adb devices**
