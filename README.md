@@ -66,14 +66,19 @@ $ npm install chart.js --save
 
 
 Dont Forget to add
+
 **ionic cordova platform add android**
 
 to run in webview
-*ionic serve*
+
+**ionic serve**
 
 to run in a device
+
 **ionic cordova run android --devices**
-ctrl + c to cancel
+
+**ctrl + c to cancel**
 
 Check device Connection
+
 **adb devices**
