@@ -1,5 +1,6 @@
 # Corazon
-
+		Whats New
+Update and Edit is now Good
 		
 
 		FOR SQLite Plugins
