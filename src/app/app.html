@@ -1,0 +1,26 @@
+<ion-menu [content]="content" >
+
+  <ion-content class="container">
+      <div class="wrapper">
+          <img class="image" src="assets/images/bg.jpg">
+          <ion-avatar item-start>
+            <img src="assets/images/avatar1.png" class="text">
+          </ion-avatar>
+          <p>{{Fname}}</p>
+      </div>
+
+    <ion-list padding >
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" style="background-color:#3f4041;color:#eee;">
+      <ion-icon [name]="p.icon" style="margin-right:10px;"></ion-icon>
+      {{p.title}}
+    </button>
+    <button menuClose ion-item *ngFor="let p of page" (click)="load(p)" style="background-color:#3f4041;color:#eee;">
+      <ion-icon [name]="p.icon" style="margin-right:10px;"></ion-icon>
+      {{p.title}}
+    </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

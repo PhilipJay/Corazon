@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click) = "sample()">
+          <!-- <ion-icon name="information-circle"></ion-icon> -->
+      </button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+   <div id="banner">
+     <div id="banner-text">
+       <h2>{{Fname}}'s Profile</h2>
+     </div> 
+   </div>
+
+<div padding-right padding-left>
+   <ion-list>
+      <ion-item *ngFor="let D of data"  style="background-color:#FFFFFD">
+          <ion-grid>
+              <ion-row>
+                  <ion-col col-8>
+                     <h2>{{ D.title }}: <span style="padding-left: 3em;"></span> {{ D.value }} {{ D.unit }} </h2>
+                  </ion-col>
+                  <ion-col col-4>
+                    <ion-buttons end>
+                      <button style="background-color:#FFFFFD" (click) = "Update(D.title ,D.value)">
+                          <ion-icon name="more"></ion-icon> 
+                    </button>
+                  </ion-buttons> 
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item *ngFor="let D of data1" style="background-color:#FFFFFD">
+          <ion-grid>
+              <ion-row>
+                  <ion-col col-8>
+                    <h2>{{ D.title }}: <span style="padding-left: 1em;"></span> {{ D.value }}/{{D.value2}} {{ D.unit }} </h2>
+                  </ion-col>
+                  <ion-col col-4>
+                    <ion-buttons end>
+                      <button style="background-color:#FFFFFD" (click) = "Update1(D.title ,D.value, D.value2)">
+                          <ion-icon name="more"></ion-icon> 
+                    </button>
+                  </ion-buttons> 
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+      </ion-item>
+    </ion-list>
+
+      <ion-list>
+      <ion-item *ngFor="let D of data2" style="background-color:#FFFFFD">
+          <ion-grid>
+              <ion-row>
+                  <ion-col col-8>
+                    <h2>{{ D.title }}: <span style="padding-left: 2em;"></span> {{ D.value }} </h2>
+                  </ion-col>
+                  <ion-col col-4>
+                    <ion-buttons end>
+                      <button style="background-color:#FFFFFD">
+                          <ion-icon name="more"></ion-icon> 
+                    </button>
+                  </ion-buttons> 
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+        </ion-item>
+    </ion-list>
+
+</div>
+</ion-content>

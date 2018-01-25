@@ -1,0 +1,21 @@
+page-insert-medication {
+    .color{
+        background-color: #FFFFFD;
+        color: black;
+        font-weight: 400px;
+    }
+    textarea {
+        width: 85%;
+        height: 15vh;
+        }
+        .toast{
+            height: 55px;
+            width: 260px;
+            background-color: #333;
+            border-style: solid;
+            border-width: 1px;
+            border-radius: 100px;
+            margin-left: 15%;
+            margin-top: 130%;
+        }
+}
