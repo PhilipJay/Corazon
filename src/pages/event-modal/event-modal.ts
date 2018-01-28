@@ -12,7 +12,7 @@ export class EventModalPage {
   event = { startTime: new Date().toISOString(), endTime: new Date().toISOString() };
   minDate = new Date().toISOString();
  
-  constructor(public navCtrl: NavController, private navParams: NavParams, public viewCtrl: ViewController,  private toastCtrl: ToastController,) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, public viewCtrl: ViewController,  private toastCtrl: ToastController) {
 
     let preselectedDate = moment(this.navParams.get('selectedDay')).format();
     this.event.startTime = preselectedDate;

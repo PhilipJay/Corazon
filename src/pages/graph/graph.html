@@ -3,7 +3,7 @@
       <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>
-    <ion-title>{{Users[0].Fname}}'s Record</ion-title>
+    <ion-title>{{Users[0].Fname}}'s Chart</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -13,7 +13,7 @@
 
   <ion-card>
     <ion-card-header>
-     Height Chart
+     Height Chart (cm)
     </ion-card-header>
     <ion-card-content>
       <canvas #HeightCanvas></canvas>
@@ -22,7 +22,7 @@
 
   <ion-card>
       <ion-card-header>
-       Weight Chart
+       Weight Chart(kg)
       </ion-card-header>
       <ion-card-content>
         <canvas #WeightCanvas></canvas>
@@ -31,7 +31,7 @@
 
   <ion-card>
       <ion-card-header>
-       Blood Sugar Chart
+       Blood Sugar Chart(mmol/L)
       </ion-card-header>
       <ion-card-content>
         <canvas #BSugarCanvas></canvas>
@@ -40,7 +40,7 @@
 
   <ion-card>
       <ion-card-header>
-       Blood Pressure Chart
+       Blood Pressure Chart(mmHg)
       </ion-card-header>
       <ion-card-content>
         <canvas #BPCanvas></canvas>

@@ -55,19 +55,53 @@ export class DatabaseProvider {
       });
   }
 
-  getGallery(){
-    return this.database.executeSql("SELECT * FROM tblGallery WHERE UserId = " + this.User[0].UserId , []).then((data) => {
+  // getGalleryFolder(){
+  //   return this.database.executeSql("SELECT DISTINCT FolderName FROM tblGallery WHERE UserId = " + this.User[0].UserId , []).then((data) => {
+  //     let Gallery = [];
+  //     if (data.rows.length > 0) {
+  //       for (var i = 0; i < data.rows.length; i++) {
+  //               Gallery.push({
+  //                           GalleryId: data.rows.item(i).GalleryId, 
+  //                           FolderName: data.rows.item(i).FolderName,
+  //                         });
+  //       }           
+  //     }
+  //     console.log("GG "+Gallery[0].GalleryId)
+  //     return Gallery;
+  //   }, err => {
+  //     console.log('Error: ', err);
+  //     return [];
+  //   });
+  // }
+
+  AddGalleryFolder(gallery){
+    
+    let data =[this.User[0].UserId, gallery.Folder];
+  
+    return this.database.executeSql("INSERT INTO tblGallery (UserId,FolderName) VALUES (?, ?)", data).then(data => {
+      return data;
+      
+    }, err => {
+     
+      console.log('Error: ', err);
+      return err;
+    });
+    
+  }
+
+  getImageGallery(Name){
+    return this.database.executeSql("SELECT * FROM tblGallery WHERE UserId = " + this.User[0].UserId + " AND FolderName = '" + Name + "'" , []).then((data) => {
       let Gallery = [];
       if (data.rows.length > 0) {
         for (var i = 0; i < data.rows.length; i++) {
           Gallery.push({
                             GalleryId: data.rows.item(i).GalleryId, 
                             FolderName: data.rows.item(i).FolderName,
-                            Description:  data.rows.item(i).Description,
                             ImgPath: data.rows.item(i).ImgPath,
                           });
         }           
       }
+      console.log("getImage "+Gallery)
       return Gallery;
     }, err => {
       console.log('Error: ', err);
@@ -75,16 +109,38 @@ export class DatabaseProvider {
     });
   }
 
-  AddGallery(UserId, gallery){
-    let data =[UserId, gallery.Folder, gallery.Desc];
-    
-    return this.database.executeSql("INSERT INTO tblGallery (UserId,FolderName,Description) VALUES (?, ?, ?)", data).then(data => {
+  AddImageGallery(Name, Path){
+    let data =[this.User[0].UserId, Name, Path];
+    console.log("AddImg " +data)
+    return this.database.executeSql("INSERT INTO tblGallery (UserId,FolderName,ImgPath) VALUES (?, ?, ?)", data).then(data => {
       return data;
     }, err => {
       console.log('Error: ', err);
       return err;
     });
   }
+
+
+
+  getGalleryFolder(){
+    return this.database.executeSql("SELECT DISTINCT FolderName FROM tblGallery WHERE UserId = " + this.User[0].UserId , []).then((data) => {
+      let Folder = [];
+      if (data.rows.length > 0) {
+        for (var i = 0; i < data.rows.length; i++) {
+          Folder.push({
+            GalleryId: data.rows.item(i).GalleryId, 
+            FolderName: data.rows.item(i).FolderName, 
+                          });
+        }           
+      }
+     
+      return Folder;
+    }, err => {
+      console.log('Error: ', err);
+      return [];
+    }); 
+  }
+
   getAllSched() {
     return this.database.executeSql("SELECT * FROM tblSchedule where UserId = " + this.User[0].UserId, []).then((data) => {
       let Schedule = [];
@@ -215,6 +271,7 @@ export class DatabaseProvider {
       if (data.rows.length > 0) {
         for (var i = 0; i < data.rows.length; i++) {
           Users.push({
+                            Avatar: data.rows.item(i).Avatar,
                             UserId: data.rows.item(i).UserId, 
                             Fname: data.rows.item(i).Fname, 
                             Gender: data.rows.item(i).Gender,
@@ -243,11 +300,28 @@ export class DatabaseProvider {
 
   UpdateUserData(value, Id, Field, Now){
      this.database.executeSql("UPDATE tblUser SET LastUpdated = '" + Now + "'," + Field +"='" +value +"' WHERE UserId =" + Id , [])
-   
   }
 
   UpdateUserData1(value, Id, Field, Now){
      this.database.executeSql("UPDATE tblUser SET LastUpdated = '" + Now + "'," + Field['Top'] +"='" +value['valueTop'] +"'," + Field['Down'] +"='" +value['valueDown'] +"' WHERE UserId = " + Id , [])
+  }
+
+  GetLatestThenDelete(Desc){
+    return this.database.executeSql("SELECT * FROM tblHistory WHERE UserID = "+ this.User[0].UserId + " AND Description = '" + Desc + "' order by HistoryId DESC limit 1", []).then((data) => {
+      let Last = [];
+      if (data.rows.length > 0) {
+        for (var i = 0; i < data.rows.length; i++) {
+          Last.push({
+            HistoryId: data.rows.item(i).HistoryId
+           });
+        }           
+      }
+      this.database.executeSql("Delete FROM tblHistory where HistoryId = " +  Last[0].HistoryId, [])
+      console.log(Last[0].HistoryId)
+    }, err => {
+      console.log('Error: ', err);
+      return [];
+    });
   }
 
   DeleteUser(ID){
@@ -262,10 +336,10 @@ export class DatabaseProvider {
   DeleteSched(ID){
     return this.database.executeSql("Delete FROM tblSchedule where ScheduleId = " + ID, [])
   }
-      addUser(Fname, Gender, Birthday, PhoneNo, Weight, Height, DrugAllergy, BloodSugar, BPSystolic, BPdiastolic,LastUpdated) {
-  let data = [Fname, Gender, Birthday, PhoneNo, Weight, Height, DrugAllergy, BloodSugar, BPSystolic, BPdiastolic,LastUpdated, LastUpdated]
-   
-    return this.database.executeSql("INSERT INTO tblUser (Fname, Gender, Birthday, PhoneNo, Weight, Height, DrugAllergy, BloodSugar, BPSystolic, BPdiastolic, LastUpdated, LastOpened) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", data).then(data => {
+      addUser(Avatar, Fname, Gender, Birthday, PhoneNo, Weight, Height, DrugAllergy, BloodSugar, BPSystolic, BPdiastolic,LastUpdated) {
+  let data = [Avatar, Fname, Gender, Birthday, PhoneNo, Weight, Height, DrugAllergy, BloodSugar, BPSystolic, BPdiastolic,LastUpdated, LastUpdated]
+   console.log(data)
+    return this.database.executeSql("INSERT INTO tblUser (Avatar, Fname, Gender, Birthday, PhoneNo, Weight, Height, DrugAllergy, BloodSugar, BPSystolic, BPdiastolic, LastUpdated, LastOpened) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", data).then(data => {
       return data;
     }, err => {
       console.log('Error: ', err);
@@ -321,6 +395,7 @@ export class DatabaseProvider {
       if (data.rows.length > 0) {
         for (var i = 0; i < data.rows.length; i++) {
           developers.push({
+                            Avatar: data.rows.item(i).Avatar, 
                             UserId: data.rows.item(i).UserId, 
                             Fname: data.rows.item(i).Fname, 
                             Gender: data.rows.item(i).Gender,

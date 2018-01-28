@@ -1,3 +1,14 @@
 page-gallery-folder {
-
+    .block {
+        position: relative;
+        .deleteIcon {
+          position: absolute !important;
+          color: red !important;
+          margin-left: 90% !important;
+          margin-top: 5px !important;
+        }
+        .deleteIcon:before {
+          font-size: 30px !important;
+        }
+        }
 }

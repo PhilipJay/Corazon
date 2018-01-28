@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
 import { DatabaseProvider } from './../../providers/database/database';
 
 
@@ -11,18 +11,24 @@ export class GalleryPage {
   Users = [];
   gallery = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private databaseprovider: DatabaseProvider,   public alertCtrl: AlertController) {
-    this.databaseprovider.getDatabaseState().subscribe(rdy => {
-      if (rdy) {
-        this.loadUserGallery();
-      }
-    })
+  constructor(public navCtrl: NavController, 
+              private modalCtrl: ModalController, 
+              public navParams: NavParams,
+              private databaseprovider: DatabaseProvider,
+              public alertCtrl: AlertController) {
+
+      this.databaseprovider.getDatabaseState().subscribe(rdy => {
+        if (rdy) {
+          this.LoadFolder();
+        }
+      })
     this.Users = this.databaseprovider.User;
   }
 
-  loadUserGallery(){
-    this.databaseprovider.getGallery().then(data => {
+  LoadFolder(){
+    this.databaseprovider.getGalleryFolder().then(data => {
       this.gallery = data;
+      console.log("G "+this.gallery)
     })
   }
 
@@ -35,12 +41,7 @@ export class GalleryPage {
           name: 'Folder',
           placeholder: 'Folder Name',
 
-        },
-        {
-          name: 'Desc',
-          placeholder: 'Description',
-
-        },
+        }
       ],
       buttons: [
         {
@@ -50,14 +51,20 @@ export class GalleryPage {
         {
           text: 'Add',
           handler: data => {
-            this.databaseprovider.AddGallery(this.Users[0].UserId, data)
-            this.loadUserGallery();
+            this.databaseprovider.AddGalleryFolder(data)
+            this.LoadFolder();
           }
         }
       ]
     });
     addListAlert.present();
     
+  }
+
+  OpenFolder(img){
+    console.log("img " + img)
+    let modal = this.modalCtrl.create('GalleryFolderPage', img);
+    modal.present();
   }
 
 }

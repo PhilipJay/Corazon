@@ -11,8 +11,8 @@ import { SQLitePorter } from '@ionic-native/sqlite-porter';
 import { SQLite } from '@ionic-native/sqlite';
 import { SMS } from '@ionic-native/sms';
 import { BackgroundMode } from '@ionic-native/background-mode';
-import { Network } from '@ionic-native/network';
-import { Geolocation } from '@ionic-native/geolocation';
+
+
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { NgCalendarModule  } from 'ionic2-calendar';
@@ -29,13 +29,15 @@ import { ManagePeoplePage } from '../pages/manage-people/manage-people';
 import { GalleryPage } from '../pages/gallery/gallery';
 import { MedicationPage } from '../pages/medication/medication';
 import { MedicationHolderPage } from '../pages/medication-holder/medication-holder';
+import { ChartHolderPage } from '../pages/chart-holder/chart-holder';
 import { PastMedicationPage } from '../pages/past-medication/past-medication';
 import { InsertUserDataPage } from '../pages/insert-user-data/insert-user-data';
 import { UpdatePeoplePage } from '../pages/update-people/update-people';
 import { AssessmentPage } from '../pages/assessment/assessment';
 import { CalendarPage } from '../pages/calendar/calendar';
 import { ScheduleHolderPage } from '../pages/schedule-holder/schedule-holder';
-import { GalleryFolderPage } from '../pages/gallery-folder/gallery-folder';
+import { WeeklyChartPage } from '../pages/weekly-chart/weekly-chart';
+import { MonthlyChartPage } from '../pages/monthly-chart/monthly-chart';
 
 @NgModule({
   declarations: [
@@ -49,10 +51,13 @@ import { GalleryFolderPage } from '../pages/gallery-folder/gallery-folder';
     InsertUserDataPage,
     UpdatePeoplePage,
     AssessmentPage,
-    GalleryFolderPage,
     MedicationHolderPage,
+    ChartHolderPage,
     PastMedicationPage,
-    ScheduleHolderPage
+    ScheduleHolderPage,
+    MonthlyChartPage,
+    WeeklyChartPage
+
   ],
   imports: [
     BrowserModule,
@@ -73,10 +78,12 @@ import { GalleryFolderPage } from '../pages/gallery-folder/gallery-folder';
     InsertUserDataPage,
     UpdatePeoplePage,
     AssessmentPage,
-    GalleryFolderPage,
     MedicationHolderPage,
+    ChartHolderPage,
     PastMedicationPage,
-    ScheduleHolderPage
+    ScheduleHolderPage,
+    MonthlyChartPage,
+    WeeklyChartPage
   ],
   providers: [
     StatusBar,
@@ -90,8 +97,6 @@ import { GalleryFolderPage } from '../pages/gallery-folder/gallery-folder';
     SQLite,
     SMS,
     BackgroundMode,
-    Network,
-    Geolocation,
     LocalNotifications,
     DatabaseProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

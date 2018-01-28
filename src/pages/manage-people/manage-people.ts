@@ -28,10 +28,6 @@ export class ManagePeoplePage {
       }
     })
   }
-  
-  ionViewDidLoad(){
-    // console.log(this.navParams.get('Birthday'));
-  }
   Option(Users){
     let actionSheet = this.actionSheetCtrl.create({
       title: Users.Fname,
@@ -41,7 +37,7 @@ export class ManagePeoplePage {
           text: 'Open',
           handler: () => {
             // Event
-            this.submitEvent(Users.Fname);
+            this.submitEvent(Users.Fname, Users.Avatar);
             let Now: String = new Date().toISOString();
             this.databaseprovider.LastOpened(Now,Users);
             this.navCtrl.setRoot(HomePage,Users);
@@ -69,7 +65,7 @@ export class ManagePeoplePage {
                     this.databaseprovider.DeleteUser(Users);
                       this.databaseprovider.getLast().then(data => {
                           this.Users = data;
-                          this.submitEvent(this.Users[0].Fname);
+                          this.submitEvent(this.Users[0].Fname, this.Users[0].Avatar) 
                       })
                    this.presentToast('Delete Successful')
                     this.loadUserData();
@@ -94,6 +90,7 @@ export class ManagePeoplePage {
     this.databaseprovider.getAllUsers().then(data => {
       this.Users = data;
       console.log(this.Users)
+      console.log(this.Users[0].Avatar)
       let L = this.Users.length
       for (var i=0; i<L; i+=1){
       this.Users[i].LastUpdated = moment(this.Users[i].LastUpdated).fromNow();
@@ -120,9 +117,6 @@ export class ManagePeoplePage {
         {
           text: 'Add',
           handler: data => {
-            console.log(data);
-            console.log(data.Fname != null);
-            console.log(data.Fname != "");
             if (data.Fname != ""){ 
               this.navCtrl.setRoot(InsertUserDataPage, data);
             }
@@ -147,8 +141,8 @@ export class ManagePeoplePage {
     toast.present();
   }
 
-  submitEvent(Fname){
-    this.events.publish('UpdateName', Fname);
+  submitEvent(Fname, Avatar){
+    this.events.publish('UpdateName', Fname, Avatar);
   }
 
 }

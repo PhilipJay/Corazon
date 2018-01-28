@@ -7,6 +7,7 @@ import { SMS } from '@ionic-native/sms';
 import { HomePage } from '../pages/home/home';
 import { GraphPage } from '../pages/graph/graph';
 import { ScheduleHolderPage } from '../pages/schedule-holder/schedule-holder';
+import { ChartHolderPage } from '../pages/chart-holder/chart-holder';
 import { ManagePeoplePage } from '../pages/manage-people/manage-people';
 import { GalleryPage } from '../pages/gallery/gallery';
 
@@ -27,6 +28,7 @@ export class MyApp {
   MedSched = [];
   UserId: any;
   Users = [];
+  Avatar: string = null;
   Fname: string = null;
   constructor(public platform: Platform, 
     public events: Events,
@@ -36,8 +38,9 @@ export class MyApp {
     private SMS: SMS,
     private databaseprovider: DatabaseProvider) {
     this.initializeApp();
-    this.events.subscribe('UpdateName', (Fname) =>{
+    this.events.subscribe('UpdateName', (Fname, Avatar) =>{
       this.Fname = Fname;
+      this.Avatar = Avatar
     })
     this.databaseprovider.getDatabaseState().subscribe(rdy => {
       if (rdy) {
@@ -50,7 +53,7 @@ export class MyApp {
       { title: 'Medication', component: MedicationHolderPage, icon: 'medkit' },
       { title: 'Account', component: ManagePeoplePage, icon: 'people' },
       { title: 'Gallery', component: GalleryPage, icon: 'images' },
-      { title: 'History', component: GraphPage, icon: 'stats' }
+      { title: 'Chart', component: ChartHolderPage, icon: 'stats' }
     ];
     this.page = [
       { title: 'Schedule', component: ScheduleHolderPage, icon: 'calendar'}
@@ -89,7 +92,7 @@ console.log(Last > TempNow)
                   console.log("1st")  // na ooverride kapag may iba na, gawin ko na lang array na magkasama yun Id at Msg
                 }
                else if( Second >= TempNow){
-                this.timer.push({ 
+                this.timer.push({
                   event: Second,
                   UserId: this.UserId,
                   Msg:  "Hello, you have 3 hours before your "+ Title +" at " + address
@@ -233,11 +236,7 @@ deleteMedSched(MedSched){
     this.databaseprovider.getLast().then(data => {
       this.Users = data;
       this.Fname = this.Users[0].Fname;
-
-      console.log("Test")
-      console.log(this.Users)
-      console.log(this.Fname)
-      console.log("Test")
+      this.Avatar = this.Users[0].Avatar;
     })
     
   }

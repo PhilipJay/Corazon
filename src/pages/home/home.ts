@@ -122,7 +122,7 @@ export class HomePage {
               value2: value1,
               Id: this.Users[0].UserId, 
               set: '1',
-              Desc: "Update"
+              Desc: "Edit"
             };
         
             this.navCtrl.push(UpdatePeoplePage, edit);

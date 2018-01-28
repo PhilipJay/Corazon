@@ -61,8 +61,11 @@ export class InsertUserDataPage {
           this.User['DAllergy'] != null && this.User['BSugar'] != null &&
           this.User['BPTop'] != null && this.User['BPDown'] != null)
         {
+          var targetPath = this.pathForImage(this.lastImage);
+
             let Now: String = new Date().toISOString();
             this.databaseprovider.addUser(
+              targetPath,
               this.Fname,
               this.User['Gender'], 
               this.User['Birthday'],
@@ -74,19 +77,18 @@ export class InsertUserDataPage {
               this.User['BPTop'],
               this.User['BPDown'],
               Now)
-              
-              console.log("KG " + this.User['Weight'])
+
               this.Weight = this.User['Weight'];
               this.Height = this.User['Height'];
               this.BSugar = this.User['BSugar'];
               this.BPTop = this.User['BPTop'];
               this.BPDown = this.User['BPDown'];
-              console.log("Kilo " + this.Weight)
+  
 
               this.presentToast('Add Successful')
               this.databaseprovider.getLatestUser().then(data => {
                 let UserId = data;
-                console.log("Kilo99 " + this.Weight)
+           
                     this.databaseprovider.addUserHistory(UserId[0].UserId, "Weight", this.Weight, Now);
                     this.databaseprovider.addUserHistory(UserId[0].UserId, "Height", this.Height, Now);
                     this.databaseprovider.addUserHistory(UserId[0].UserId, "Blood Sugar", this.BSugar, Now);
@@ -97,7 +99,7 @@ export class InsertUserDataPage {
             // every Change, every data, it would text the user
             // let Msg2 = "Your latest info:<br>Height: "+ this.User['Height']
 
-            this.submitEvent(this.Fname);
+            this.submitEvent(this.Fname, targetPath);
             this.User = {};
             this.navCtrl.setRoot(HomePage);
         }
@@ -119,8 +121,8 @@ export class InsertUserDataPage {
 
     }
 
-    submitEvent(Fname){
-      this.events.publish('UpdateName', Fname);
+    submitEvent(Fname, Avatar){
+      this.events.publish('UpdateName', Fname, Avatar);
     }
 
   public presentActionSheet() {
@@ -208,46 +210,9 @@ public pathForImage(img) {
   if (img === null) {
     return '';
   } else {
-    // console.log(cordova.file.dataDirectory + img);
+    console.log("image " + cordova.file.dataDirectory + img);
     return cordova.file.dataDirectory + img;
   }
-}
-public uploadImage() {
-  // Destination URL
-  var url = "../img";
- 
-  // File for Upload
-  var targetPath = this.pathForImage(this.lastImage);
- 
-  // File name only
-  var filename = this.lastImage;
- 
-  var options = {
-    fileKey: "file",
-    fileName: filename,
-    chunkedMode: false,
-    mimeType: "multipart/form-data",
-    params : {'fileName': filename}
-  };
- 
-  const fileTransfer: TransferObject = this.transfer.create();
- 
-  this.loading = this.loadingCtrl.create({
-    content: 'Uploading...',
-  });
-  this.loading.present();
- 
-  // Use the FileTransfer to upload the image
-  fileTransfer.upload(targetPath, url, options).then(data => {
-    this.loading.dismissAll()
-    this.presentToast('Image succesful uploaded.');
-  }, err => {
-    this.loading.dismissAll()
-    this.presentToast('Error');
-  });
-  console.log(targetPath)
-  console.log(url)
-  console.log(options)
 }
 }
 

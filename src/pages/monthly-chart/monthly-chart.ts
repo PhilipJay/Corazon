@@ -4,24 +4,24 @@ import { DatabaseProvider } from './../../providers/database/database';
 import * as moment from 'moment';
 import { Chart } from 'chart.js';
 @Component({
-  selector: 'page-graph',
-  templateUrl: 'graph.html',
+  selector: 'page-monthly-chart',
+  templateUrl: 'monthly-chart.html',
 })
-export class GraphPage {
+export class MonthlyChartPage {
   Title: string = null;
   Users = [];
   Record = [];
- 
-  Height = [];
-  Weight = [];
-  BSugar = [];
-  BP = [];
-  BP1 = [];
 
-  HDate = [];
-  WDate = [];
-  BSDate = [];
-  BPDate = [];
+  LM_Height = [];
+  LM_Weight = [];
+  LM_BSugar = [];
+  LM_BP = [];
+  LM_BP1 = [];
+
+  LM_HeightDate = [];
+  LM_WeightDate = [];
+  LM_BSugarDate = [];
+  LM_BPDate = [];
 
   @ViewChild('HeightCanvas') HeightCanvas;
   @ViewChild('WeightCanvas') WeightCanvas;
@@ -46,39 +46,49 @@ export class GraphPage {
     
       this.databaseprovider.getRecord().then(data => {
         this.Record = data;
+        let  Month = new Date();
+        Month.setDate(new Date(Month).getDate()-30)
+
         let L = this.Record.length
         for (var i=0; i<L; i+=1){
           if (this.Record[i].Description == "Height"){
               let RecordDate = new Date(this.Record[i].DateInserted)
-              this.Height.push(this.Record[i].First);
-              this.HDate.push(moment(this.Record[i].DateInserted).format('ll'))
+               if (RecordDate >= Month){
+                this.LM_Height.push(this.Record[i].First);
+                this.LM_HeightDate.push(moment(RecordDate).format('ll'))
+               }
           }
-          else if(this.Record[i].Description == "Weight"){
-              let RecordDate = new Date(this.Record[i].DateInserted)
-              this.Weight.push(this.Record[i].First);
-              this.WDate.push(moment(this.Record[i].DateInserted).format('ll'))
-        }
-          else if(this.Record[i].Description == "Blood Sugar"){
-              let RecordDate = new Date(this.Record[i].DateInserted)
-              this.BSugar.push(this.Record[i].First);
-              this.BSDate.push(moment(this.Record[i].DateInserted).format('ll'))
-        }
-          else if(this.Record[i].Description == "Blood Pressure"){
-              let RecordDate = new Date(this.Record[i].DateInserted)
-              this.BP.push(this.Record[i].First);
-              this.BP1.push(this.Record[i].Second);
-              this.BPDate.push(moment(this.Record[i].DateInserted).format('ll'))
-        }
+            else if(this.Record[i].Description == "Weight"){
+                let RecordDate = new Date(this.Record[i].DateInserted)
+                 if (RecordDate >= Month){
+                    this.LM_Weight.push(this.Record[i].First);
+                    this.LM_WeightDate.push(moment(RecordDate).format('ll'))
+                 }
+            }
+            else if(this.Record[i].Description == "Blood Sugar"){
+                let RecordDate = new Date(this.Record[i].DateInserted)
+                if (RecordDate >= Month){
+                    this.LM_BSugar.push(this.Record[i].First);
+                    this.LM_BSugarDate.push(moment(RecordDate).format('ll'))
+                }
+            }
+            else if(this.Record[i].Description == "Blood Pressure"){
+                let RecordDate = new Date(this.Record[i].DateInserted)
+                 if (RecordDate >= Month){
+                    this.LM_BP.push(this.Record[i].First);
+                    this.LM_BP1.push(this.Record[i].Second);
+                    this.LM_BPDate.push(moment(RecordDate).format('ll'))
+                }
+            }
         }
           this.chart();
       })
     }
-  
     chart() {
              this.HeightChart = new Chart(this.HeightCanvas.nativeElement, {
                  type: 'line',
                  data: {
-                     labels: this.HDate,
+                     labels: this.LM_HeightDate,
                      datasets: [
                          {
                              label: "Weekly",
@@ -99,7 +109,7 @@ export class GraphPage {
                              pointHoverBorderWidth: 2,
                              pointRadius: 2,
                              pointHitRadius: 10,
-                             data: this.Height,
+                             data: this.LM_Height,
                              spanGaps: false,
                          }
                      ]
@@ -109,7 +119,7 @@ export class GraphPage {
              this.WeightChart = new Chart(this.WeightCanvas.nativeElement, {
               type: 'line',
               data: {
-                  labels: this.WDate,
+                  labels: this.LM_WeightDate,
                   datasets: [
                       {
                           label: "Weight in kg",
@@ -130,7 +140,7 @@ export class GraphPage {
                           pointHoverBorderWidth: 2,
                           pointRadius: 2,
                           pointHitRadius: 10,
-                          data: this.Weight,
+                          data: this.LM_Weight,
                           spanGaps: false,
                       }
                   ]
@@ -140,7 +150,7 @@ export class GraphPage {
           this.BSugarChart = new Chart(this.BSugarCanvas.nativeElement, {
             type: 'line',
             data: {
-                labels: this.BSDate,
+                labels: this.LM_BSugarDate,
                 datasets: [
                     {
                         label: "Blood Sugar in mmol/L",
@@ -161,7 +171,7 @@ export class GraphPage {
                         pointHoverBorderWidth: 2,
                         pointRadius: 2,
                         pointHitRadius: 10,
-                        data: this.BSugar,
+                        data: this.LM_BSugar,
                         spanGaps: false,
                     }
                 ]
@@ -171,7 +181,7 @@ export class GraphPage {
         this.BPChart = new Chart(this.BPCanvas.nativeElement, {
           type: 'line',
           data: {
-              labels: this.BPDate,
+              labels: this.LM_BPDate,
               datasets: [
                   {
                       label: "Systolic",
@@ -192,7 +202,7 @@ export class GraphPage {
                       pointHoverBorderWidth: 2,
                       pointRadius: 2,
                       pointHitRadius: 10,
-                      data: this.BP,
+                      data: this.LM_BP,
                       spanGaps: false,
                   },
                   {
@@ -214,7 +224,7 @@ export class GraphPage {
                     pointHoverBorderWidth: 2,
                     pointRadius: 2,
                     pointHitRadius: 10,
-                    data: this.BP1,
+                    data: this.LM_BP1,
                     spanGaps: false,
                   }
               ]

@@ -46,15 +46,15 @@ export class UpdatePeoplePage {
         Field = this.title;
       }
       if (this.value != ""){
-        this.databaseprovider.UpdateUserData(this.value, this.UserId, Field, Now);
-        console.log(this.Desc)
-         if (this.Desc == "Update"){
-           if (this.title != "Contact")
+        if (this.title != "Contact"){
+          if (this.Desc == "Edit"){  
+              this.databaseprovider.GetLatestThenDelete(this.title);
+          }
+          this.databaseprovider.UpdateUserData(this.value, this.UserId, Field, Now);
           this.databaseprovider.addUserHistory(this.Users[0].UserId, this.title, this.value, Now);
-          console.log("Insert to history")
-         }
-        this.presentToast('Update Successful')
-        this.navCtrl.setRoot(HomePage)
+          this.presentToast('Update Successful')
+          this.navCtrl.setRoot(HomePage)
+        }
       }
       else{
         this.presentToast('Fill Out The Field')
@@ -71,14 +71,13 @@ export class UpdatePeoplePage {
       valueDown: this.value2
     };
     if (this.value1 != "" && this.value2 !=""){
-      this.databaseprovider.UpdateUserData1(value, this.UserId, Field, Now );
-      console.log(this.Desc)
-      if (this.Desc == "Update"){
-        this.databaseprovider.addUserHistory1(this.Users[0].UserId, this.title, this.value1, this.value2,Now);
-        console.log("Insert to history")
+       if (this.Desc == "Edit"){  
+           this.databaseprovider.GetLatestThenDelete(this.title);
        }
-      this.presentToast('Update Successful')
-      this.navCtrl.setRoot(HomePage)
+        this.databaseprovider.UpdateUserData1(value, this.UserId, Field, Now );
+        this.databaseprovider.addUserHistory1(this.Users[0].UserId, this.title, this.value1, this.value2,Now);
+        this.presentToast('Update Successful')
+        this.navCtrl.setRoot(HomePage);
     }
     else{
       this.presentToast('Fill Out The Field')

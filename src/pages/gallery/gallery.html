@@ -13,7 +13,7 @@
 <ion-content>
 
 
-         <ion-list *ngFor="let G of gallery">
+         <ion-list *ngFor="let G of gallery" (click)="OpenFolder(G)">
             <ion-item>
               <ion-thumbnail item-start>
                 <img src="assets/images/Folder.png">
