@@ -35,7 +35,7 @@ $ ionic cordova  plugin add cordova-plugin-filepath --save
 
 
 		FOR LOCAL NOTIFICATION
-$ ionic cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications
+$ cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications
 
 $ npm install --save @ionic-native/local-notifications
 
