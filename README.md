@@ -65,15 +65,15 @@ $ npm install chart.js --save
 		Also install Moment
 
 
-Dont Forget to add
+	Dont Forget to add
 
 **ionic cordova platform add android**
 
-to run in webview
+	to run in webview
 
 **ionic serve**
 
-to run in a device
+	to run in a device
 
 **ionic cordova run android --devices**
 
