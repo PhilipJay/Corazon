@@ -62,6 +62,9 @@ $ npm install --save @ionic-native/background-mode
 
 $ npm install chart.js --save
 
+		Image Viewer
+$ npm install --save ionic-img-viewer
+
 		Also install Moment
 
 
