@@ -51,7 +51,7 @@ $ npm install --save @ionic-native/sms
 
 		FOR BACKGROUND MODE
 
-$ ionic cordova plugin add https://github.com/katzer/cordova-plugin-background-mode.git
+$ cordova plugin add https://github.com/katzer/cordova-plugin-background-mode.git
 
 $ npm install --save @ionic-native/background-mode
 
